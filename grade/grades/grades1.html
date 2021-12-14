@@ -1,0 +1,147 @@
+<?php
+	session_start();
+
+	$userid="";
+	
+	if(isset($_SESSION['userid'])) $userid = $_SESSION['userid'];
+
+?>
+<!doctype html>
+<html>
+    <style>
+	    * { margin : 0; }
+	    img{
+            margin : 20px;
+            width : 200px;
+            height : 80px;
+        }
+        nav{
+            position : fixed;
+            height : 100%;
+            width : 18%;
+            float : left;
+            background-color:#d5fefd;
+        }
+        #navigat li{
+            list-style: none;
+            cursor:pointer;
+        }
+        #navigat li:hover{
+            transform : translate(20px);
+        }
+        #navigat li{
+            margin-top : 20px;
+            color : black;
+            font-size : 17px;
+        }
+        #Menu {
+            margin-top : 30px;
+            height: 30px;
+            width: 850px;
+            background-color:#ffffff;
+        }
+        #Menu ul li {
+            list-style: none;
+            color: white;
+            background-color: #2d2d2d;
+            float: left;
+            line-height: 30px;
+            vertical-align: middle;
+            text-align: center;
+            cursor:pointer;
+        }
+        #Menu .menuLink {
+            text-decoration:none;
+            color: white;
+            display: block;
+            width: 150px;
+            font-size: 12px;
+            font-weight: bold;
+            font-family: "Trebuchet MS", Dotum, Arial;
+        }
+        #Menu .menuLink:hover {
+            color: white;
+            background-color: #4d4d4d;
+        }
+        section{
+            width : 82%;
+            height : 100%;
+            float : right;
+        }
+        #wrap {
+            position:relative;
+            width:1500px;
+            height:1500px;
+            left:50%;
+            transform: translate(-50%, 0);
+        }
+        #wrap > div {
+            width:600px;
+            height:600px;
+            border:1px solid #333;
+            float:left;
+            margin: 30px;
+            box-sizing:border-box;
+        }
+        #wrap > div:nth-child(3) {
+            clear:both;
+        }
+        #scheduler{
+            background-color : black;
+        }
+        #notice{
+            background-color : violet;
+        }
+        #calender{
+            background-color : cyan;
+        }
+        table{
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+	<nav>
+		<p>
+			<img onclick="window.open('home.html','_self')" src = 'logo.png' style="cursor: pointer;">
+		</p>
+		<ul id="navigat">
+			<li onclick="window.open('home.html','_self')">ㅡ HOME</li><br>
+
+		<!-- 비 로그인시 로그인/학번등록 -->
+		<?php																		
+			if(!$userid) {															
+		?>
+			<li onclick="window.open('login.html','_self')">ㅡ 로그인/학번등록 </li><br>
+
+		<!-- 로그인시 접속 학번출력 및 로그아웃 -->
+		<?php } else { ?>														
+			<li>ㅡ 접속 학번 : <?php print "$userid" ?> </li><br>						
+			<li onclick="window.open('logout.php','_self')">ㅡ 로그아웃 </li><br>
+		<?php } ?>
+
+			<li onclick="window.open('grade1.html','_self')">ㅡ 학적 관리</li><br>
+			<li onclick="window.open('grades1.html','_self')">ㅡ 성적 조회</li><br>
+            			<li onclick="window.open('zero_fee.php','_self')">ㅡ 0원 등록 신청</li><br>
+			<li onclick="window.open('lookup_fee.html','_self')">ㅡ 등록 내역 조회</li><br>
+          			<li onclick="window.open('leave_page.html','_self')">ㅡ 휴·복학 신청</li><br>
+			<li onclick="window.open('sugang.html','_self')">ㅡ 수강 계획서 조회</li><br>
+		</ul>
+    	</nav>
+
+	<section>
+
+		<form method="post" action="./submit5.php">
+		학기
+		<SELECT name="select">
+			<option value="20211" selected>2021년도 1학기</option>
+			<option value="20202">2020년도 2학기</option>
+			<option value="20201">2020년도 1학기</option>
+			<option value="20192">2019년도 2학기</option>
+		</SELECT><br>
+		<p align=right><INPUT type="submit" value="조회"></p>
+		</form>
+
+	</body>
+	</section>
+</html>

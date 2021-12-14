@@ -1,0 +1,93 @@
+<html>
+    <head>
+<meta charset="utf-8">
+        <style>
+            body{
+                background-color: #d5fefd;
+                background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
+            }
+            div{
+                width : 400px;
+                height: 550px;
+                background-color : white;
+                margin-left : 750px;
+                border-radius : 15px;
+                margin-top : 50px;
+                box-shadow: 5px 5px 20px gray;
+            }
+            input{
+                margin-top : 70px;
+                width : 400px;
+                height : 40px;
+                background-color : white;
+                border : 1px solid gray;
+                border-radius : 15px;
+            }
+            #save{
+                margin-top : 40px;
+                width : 400px;
+                height : 40px;
+                background-color : gainsboro;
+                border : 1px solid white;
+                border-radius : 15px;
+            }
+
+        </style>
+
+<!-- 아이디 비밀번호 체크 함수들 -->
+<script>
+   function check_input()
+   {
+      if (!document.member_input.id.value) {
+          alert("아이디를 입력하세요");    
+          document.member_input.id.focus();
+          return;
+      }
+
+      if (!document.member_input.password.value) {
+          alert("비밀번호를 입력하세요");    
+          document.member_input.password.focus();
+          return;
+      }
+
+      document.member_form.submit();
+   }
+
+   function check_id() {
+     window.open("member_check_id.php?id=" + document.member_input.id.value,
+         "IDcheck",
+          "left=700,top=300,width=350,height=200,scrollbars=no,resizable=yes");
+   }
+</script>
+
+    </head>
+    <body>
+        <img src = 'logo.png' style="border: none;width : 300px;height : 80px;margin-left : 800px;margin-top : 150px;cursor: pointer;" onclick="window.open('home.html','_self')">
+        <div>
+			<!-- member_insert.php로 입력값 전송 -->
+			<form  name="member_input" method="post" action="member_insert.php">
+
+            <input type="text" id="id" name="id" placeholder="학번/사번"></p>
+
+			<!-- 아이디 체크용 함수[ check_id() ] 실행버튼 -->
+			<a href="#"><img src="check_id.gif" onclick="check_id()"></button></a>
+
+            <input type="text" id="password" name="password" placeholder="비밀번호"></p>
+			
+			<!-- 입력정보 전달해주는 함수[ check_input() ] 실행버튼 -->
+            <button type="submit" onclick="check_input()" id="save">정보 입력</button></form>
+
+            <button type="submit" onclick="window.open('login.html')" id="save">돌아가기</button>
+        </div>
+    </body>
+</html>
+
+
+
+<!-- 테이블 코드 양식
+create database pbl_db;
+use pbl_db;
+
+create table members ( 
+id char(10) not null, password char(30) not null, primary key(id)); 
+-->

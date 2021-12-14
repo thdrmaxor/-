@@ -1,0 +1,151 @@
+<?php
+    session_start();
+
+    $userid="";
+
+    if(isset($_SESSION['userid'])) $userid = $_SESSION['userid'];
+
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <form action="return_page.php" method="post">
+            <nav style='float:left; background-color:#d5fefd; height:100%; width:18%; position:fixed; min-width:200px'>
+              <p>
+                  <img src="logo.png" style='margin:20px; width:200px; height:80px'>
+              </p>
+              <ul id="navigat" style='margin-top:20px; font-size:17px; list-style: none; cursor:pointer;' >
+		<li onclick="window.open('home.html','_self')">ㅡ HOME</li><br>
+
+
+		<!-- 비 로그인시 로그인/학번등록 -->
+		<?php																		
+			if(!$userid) {															
+		?>
+			<li onclick="window.open('login.html','mywin')">ㅡ 로그인/학번등록 </li><br>
+
+		<!-- 로그인시 접속 학번출력 및 로그아웃 -->
+		<?php } else { ?>														
+			<li>ㅡ 접속 학번 : <?php print "$userid" ?> </li><br>						
+			<li onclick="window.open('logout.php','mywin')">ㅡ 로그아웃 </li><br>
+		<?php } ?>
+
+
+		<!-- 비 로그인시 알림창(alert 스크립트) -->
+		<?php																			
+			if(!$userid) {															
+		?>
+			<li onclick="alertFunction()">ㅡ 학적 관리</li><br>					
+																							
+		<!-- 로그인시 기능동작 -->
+		<?php } else { ?>															
+			<li onclick="window.open('grade1.html','mywin')">ㅡ 학적 관리</li><br>
+		<?php } ?>
+
+
+		<!-- 비 로그인시 알림창(alert 스크립트) -->
+		<?php																			
+			if(!$userid) {															
+		?>
+			<li onclick="alertFunction()">ㅡ 성적 조회</li><br>		
+
+		<!-- 로그인시 기능동작 -->
+		<?php } else { ?>	
+			<li onclick="window.open('grades1.html','mywin')">ㅡ 성적 조회</li><br>
+		<?php } ?>
+
+
+		<!-- 비 로그인시 알림창(alert 스크립트) -->
+		<?php																			
+			if(!$userid) {															
+		?>
+			<li onclick="alertFunction()">ㅡ 0원 등록 신청</li><br>						
+																							
+		<!-- 로그인시 기능동작 -->
+		<?php } else { ?>	
+            <li onclick="window.open('zero_fee_m','mywin')">ㅡ 0원 등록 신청</li><br>
+		<?php } ?>
+
+
+		<!-- 비 로그인시 알림창(alert 스크립트) -->
+		<?php																			
+			if(!$userid) {															
+		?>
+			<li onclick="alertFunction()">ㅡ 등록 내역 조회</li><br>					
+																							
+		<!-- 로그인시 기능동작 -->
+		<?php } else { ?>	
+			<li onclick="window.open('lookup_fee.html','mywin')">ㅡ 등록 내역 조회</li><br>
+		<?php } ?>
+
+
+		<!-- 비 로그인시 알림창(alert 스크립트) -->
+		<?php																			
+			if(!$userid) {															
+		?>
+			<li onclick="alertFunction()">ㅡ 휴·복학 신청</li><br>
+					
+																							
+		<!-- 로그인시 기능동작 -->
+		<?php } else { ?>	
+            <li onclick="window.open('leave_page.html','mywin')">ㅡ 휴·복학 신청</li><br>
+		<?php } ?>
+
+
+		<!-- 비 로그인시 알림창(alert 스크립트) -->
+		<?php																			
+			if(!$userid) {															
+		?>
+			<li onclick="alertFunction()">ㅡ 수강 계획서 조회</li><br>
+					
+																							
+		<!-- 로그인시 기능동작 -->
+		<?php } else { ?>	
+			<li onclick="window.open('sugang.html','mywin')">ㅡ 수강 계획서 조회</li><br>
+		<?php } ?>
+
+		</ul>
+    </nav>
+
+            <section style='width:82%; height:100%; float:right'>
+                <div id="wrap" style='height:100%; width:81%; margin:50px'>
+                    <nav style='height: 40px; background-color: teal; align-items:center; color:white; text-align:center'>
+                        <span style='margin:50px; padding:5px' onclick="window.open('page.html','mywin')"> 휴 · 복학 조회 </span>
+                        <span style='margin:50px; padding:5px' onclick="window.open('leave_page.html','mywin')"> 휴 학 신 청 </span>
+                        <span style='margin:50px; padding:5px' onclick="window.open('return_page.html','mywin')"> 복 학 신 청 </span>
+                    </nav>
+
+                    <div style='width:100%; height:250px; margin-top:50px'>
+                        - 복 학 신 청 <input type="submit" value="복학신청">
+                        <div style='height:30px; margin:10px'>
+                            <table style='border-spacing:25px; border: 1px solid black'>
+                                <tr>
+                                    <td colspan="4">
+                                        <input type="radio" name="1" value="군복학" />군복학
+                                        <input type="radio" name="1" value="일반복학" />일반복학
+                                    </td>
+                                <tr>
+                                    <td>이름</td>
+                                    <td><input type="text" name="name"></td>
+                                    <td>학번</td>
+                                    <td><input type="text" name="stu_id"></td>
+                                    <td>복학 사유</td>
+                                    <td><input type="text" name='reason'></td>
+                                </tr>
+                                <tr>
+                                    <td>신청 일자</td>
+                                    <td><input type="text" name='day' placeholder="yyyy-mm-dd"></td>
+                                    <td>주소</td>
+                                    <td colspan=4><input type="text" name='address' width="200px"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </body>
+</html>

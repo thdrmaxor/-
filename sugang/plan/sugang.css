@@ -1,0 +1,12 @@
+@charset "utf-8";
+* {
+    margin: 0;
+}
+
+#sugang_table tr:hover {
+    background-color: black;
+}
+
+#test0{
+    background-color : cyan;
+}
